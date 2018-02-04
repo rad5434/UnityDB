@@ -100,24 +100,27 @@ def update_task(count):
 @app.route('/data', methods=['POST'])
 def add_data():
     data = mongo.db.data
-    db.user.remove({})
+    #data.remove({})
     reqdata = json.loads(request.data)
     vector = reqdata['data']
     #myaxis=vector['axis']
     print vector['id']
+    if vector['id'] ==0:
+	data.remove({})
     postall_id = data.insert({'_id':vector['id'],'vector': vector})
     print postall_id
     new_postall = data.find_one({'_id': postall_id })
     print new_postall
     output = {'vector': new_postall['vector']}
-    print "Posting " + str(output)
+    #print "Posting " + str(output)
     return jsonify({'data': output})
 
 @app.route('/data/<int:count>', methods=['POST'])
 def change_data(count):
     print "Posting in post"
-    db.user.remove({})
+    #mongo.db.user.remove({})
     data = mongo.db.data
+    #data.remove({})
     reqdata = request.data
     print type(reqdata)
     if reqdata:
