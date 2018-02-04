@@ -100,6 +100,7 @@ def update_task(count):
 @app.route('/data', methods=['POST'])
 def add_data():
     data = mongo.db.data
+    db.user.remove({})
     reqdata = json.loads(request.data)
     vector = reqdata['data']
     #myaxis=vector['axis']
@@ -115,6 +116,7 @@ def add_data():
 @app.route('/data/<int:count>', methods=['POST'])
 def change_data(count):
     print "Posting in post"
+    db.user.remove({})
     data = mongo.db.data
     reqdata = request.data
     print type(reqdata)
