@@ -104,18 +104,18 @@ def add_data():
     reqdata = json.loads(request.data)
     vector = reqdata['data']
     #myaxis=vector['axis']
-    print vector['id']
-    if vector['id'] ==0:
+    #print vector['id']
+    #if vector['id'] ==0:
 	data.remove({})
-    postall_id = data.insert({'_id':vector['id'],'vector': vector})
-    print postall_id
-    new_postall = data.find_one({'_id': postall_id })
-    print new_postall
+    postall_id = data.insert({'_id':vector['id']})
+    #print postall_id
+    #new_postall = data.find_one({'_id': postall_id })
+    #print new_postall
     output = {'vector': new_postall['vector']}
     #print "Posting " + str(output)
     return jsonify({'data': output})
 
-@app.route('/data/<int:count>', methods=['POST'])
+'''@app.route('/data/<int:count>', methods=['POST'])
 def change_data(count):
     print "Posting in post"
     #mongo.db.user.remove({})
@@ -154,7 +154,7 @@ def change_data(count):
         print "Posting " + str(output)
         return jsonify({'data': output})
 
-'''@app.route('/data/<int:count>', methods=['POST'])
+@app.route('/data/<int:count>', methods=['POST'])
 def change_data(count):
     data = mongo.db.data
     reqdata = json.loads(request.data)
