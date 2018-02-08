@@ -24,15 +24,15 @@ def get_all_datas():
     for s in data.find():
         #s.pop('_id')
         print s
-        output.append(s['vector'])
+        output.append(s['data'])
         #{'vector' : s['vector']}
     #output=output.encode("ascii", "replace")
     output = json.dumps(output)
     output = json.loads(output)
     #type(loaded_r)  # Output dict
-    print "Getting " + str({'results':output})
+    print "Getting " + str(output)
     #print "Type: "+ str(type(output))
-    return jsonify({'results':output})
+    return jsonify(output)
 
 @app.route('/data/<int:count>', methods=['GET'])
 def get_all_data(count):
@@ -104,15 +104,17 @@ def add_data():
     reqdata = json.loads(request.data)
     vector = reqdata['data']
     #myaxis=vector['axis']
-    #print vector['id']
+    #num =  vector['num']
+    print vector
+    #print vector['num']
     #if vector['id'] ==0:
-	data.remove({})
-    postall_id = data.insert({'_id':vector['id']})
+    data.remove({})
+    postall_id = data.insert({'data':data})
     #print postall_id
-    #new_postall = data.find_one({'_id': postall_id })
+    new_postall = data.find_one({'_id': postall_id })
     #print new_postall
-    output = {'vector': new_postall['vector']}
-    #print "Posting " + str(output)
+    output = {'data': new_postall['data']}
+    print "Posting " + str(output)
     return jsonify({'data': output})
 
 '''@app.route('/data/<int:count>', methods=['POST'])
