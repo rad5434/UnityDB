@@ -24,17 +24,17 @@ def get_all_datas():
     for s in data.find():
         #s.pop('_id')
         print s
-        output.append(s['data'])
+        output.append(s['num'])
         #{'vector' : s['vector']}
     #output=output.encode("ascii", "replace")
     output = json.dumps(output)
     output = json.loads(output)
     #type(loaded_r)  # Output dict
-    print "Getting " + str(output)
+    print "Getting " + str(output[0])
     #print "Type: "+ str(type(output))
-    return jsonify(output)
+    return jsonify(output[0])
 
-@app.route('/data/<int:count>', methods=['GET'])
+'''@app.route('/data/<int:count>', methods=['GET'])
 def get_all_data(count):
     data = mongo.db.data
     output = []
@@ -49,7 +49,7 @@ def get_all_data(count):
     #print "The first one:" + str(output[0])
     return jsonify(output[count])
 
-'''@app.route('/data/<int:count>', methods=['GET'])
+@app.route('/data/<int:count>', methods=['GET'])
 def get_one_data(count):
     data = mongo.db.data
     output=[]
@@ -109,11 +109,11 @@ def add_data():
     #print vector['num']
     #if vector['id'] ==0:
     data.remove({})
-    postall_id = data.insert({'data':data})
+    postall_id = data.insert({'num':vector})
     #print postall_id
     new_postall = data.find_one({'_id': postall_id })
     #print new_postall
-    output = {'data': new_postall['data']}
+    output = {'num': new_postall['num']}
     print "Posting " + str(output)
     return jsonify({'data': output})
 
