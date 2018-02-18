@@ -7,7 +7,7 @@ from pymongo import MongoClient
 app=Flask(__name__)
 @app.route('/')
 def hello():
-    return "This is database ec2 instance"
+    return "This is Unity database ec2 instance"
 
 #waaa has the results data
 app.config['MONGO_DBNAME'] = 'waaa'
