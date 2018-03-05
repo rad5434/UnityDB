@@ -137,6 +137,45 @@ def update_task(count):
     print "Posting " + str(output)
     return jsonify(output)
 
+
+
+@app.route('/emptyDB', methods=['GET'])
+def empty_sketches():
+    data = mongo2.db.data
+    output = []
+    for s in data.find():
+        #s.pop('_id')
+        print s
+        output.append(s['vector'])
+        #{'vector' : s['vector']}
+    #output=output.encode("ascii", "replace")
+    output = json.dumps(output)
+    output = json.loads(output)
+    #type(loaded_r)  # Output dict
+    print "Getting " + str(output)
+    data.remove({})
+    #print "Type: "+ str(type(output))
+    return jsonify({"results":output})
+
+
+
+@app.route('/all_sketch', methods=['GET'])
+def all_sketches():
+    data = mongo2.db.data
+    output = []
+    for s in data.find():
+        #s.pop('_id')
+        print s
+        output.append(s['vector'])
+        #{'vector' : s['vector']}
+    #output=output.encode("ascii", "replace")
+    output = json.dumps(output)
+    output = json.loads(output)
+    #type(loaded_r)  # Output dict
+    print "Getting " + str(output)
+    #print "Type: "+ str(type(output))
+    return jsonify({"results":output})
+
 @app.route('/one_sketch', methods=['PUT'])    #"""PUT Pranav acts as post"""
 def postFromUnity():
     print "\n\n PUT \n\n"
