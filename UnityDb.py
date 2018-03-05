@@ -137,20 +137,21 @@ def update_task(count):
     print "Posting " + str(output)
     return jsonify(output)
 
-@app.route('/one_sketch/', methods=['PUT'])    #"""PUT Pranav acts as post"""
-def update_task(count):
+@app.route('/one_sketch', methods=['PUT'])    #"""PUT Pranav acts as post"""
+def postFromUnity():
     print "\n\n PUT \n\n"
     data = mongo2.db.data
     reqdata = json.loads(request.data)
-    vector = reqdata
-    print vector
+    vector = reqdata['data']
+    print vector 
     #postall_id = data.update_one({'_id': vector['id']}, {'$set': {'vector': vector}})
     postall_id = data.insert({'vector': vector})
-    print postall_id.matched_count
-    new_postall = data.find_one({'_id': vector['id']})
-    output = {'vector': new_postall['vector']}
-    print "Posting " + str(output)
-    return jsonify(output)
+    #print postall_id.matched_count
+    #new_postall = data.find_one({'_id': vector['id']})
+    #print new_postall
+    #output = {'vector': new_postall['vector']}
+    #print "Posting " + str(output)
+    return jsonify(vector)
     #data = mongo.db.data
     # output = []
     # for s in mongo2.db.data.find():
